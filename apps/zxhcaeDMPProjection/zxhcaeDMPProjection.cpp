@@ -517,7 +517,7 @@ bool PROVslsimg(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVs
 		for (int iy=0;iy<nPROImWY;iy++)
 			for (int ix=0;ix<nPROImWX;ix++)
 			{
-				short sMaxInten=0;
+				short sMaxInten=-1000;
 				for (int iz=0;iz<nPROImWZ;iz++)
 				{
 					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
@@ -528,6 +528,229 @@ bool PROVslsimg(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVs
 					}
 				}
 				imgPROVsls.SetPixelByGreyscale(ix,iy,0,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_NM(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+	int B_z=nPROImWZ*0.5-8;
+	int F_z=nPROImWZ*0.5+8;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iy=0;iy<nPROImWY;iy++)
+			for (int ix=0;ix<nPROImWX;ix++)
+			{
+				short sMaxInten=-1000;
+				for (int iz=B_z;iz<=F_z;iz++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(ix,iy,nPROImWZ*0.5,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_NM2(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iy=0;iy<nPROImWY;iy++)
+			for (int ix=0;ix<nPROImWX;ix++)
+			{
+				short sMaxInten=-1000;
+				for (int iz=0;iz<nPROImWZ;iz++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(ix,iy,0.5*nPROImWZ,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_x(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iy=0;iy<nPROImWY;iy++)
+			for (int iz=0;iz<nPROImWZ;iz++)
+			{
+				short sMaxInten=-1000;
+				for (int ix=0;ix<nPROImWX;ix++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(0,iy,iz,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_x_NM(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+	int B_x=nPROImWX*0.5;
+	int F_x=nPROImWX*0.5;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iy=0;iy<nPROImWY;iy++)
+			for (int iz=0;iz<nPROImWZ;iz++)
+			{
+				short sMaxInten=-1000;
+				for (int ix=B_x;ix<=F_x;ix++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(nPROImWX*0.5,iy,iz,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_x_NM2(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iy=0;iy<nPROImWY;iy++)
+			for (int iz=0;iz<nPROImWZ;iz++)
+			{
+				short sMaxInten=-1000;
+				for (int ix=0;ix<nPROImWX;ix++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(nPROImWX*0.5,iy,iz,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_y(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iz=0;iz<nPROImWZ;iz++)
+			for (int ix=0;ix<nPROImWX;ix++)
+			{
+				short sMaxInten=-1000;
+				for (int iy=0;iy<nPROImWY;iy++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(ix,nPROImWX*0.5,iz,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_y_NM(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+		int B_y=nPROImWY*0.5-4;
+	int F_y=nPROImWY*0.5+4;
+	for (int it=0;it<nPROImWT;it++)
+		for (int iz=0;iz<nPROImWZ;iz++)
+			for (int ix=0;ix<nPROImWX;ix++)
+			{
+				short sMaxInten=-1000;
+				for (int iy=B_y;iy<=F_y;iy++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(ix,nPROImWY*0.5,iz,it,sMaxInten);
+			}
+			
+
+	return true;
+}
+bool PROVslsimg_y_NM2(zxhImageDataT<short> &imgReadVsls,zxhImageDataT<short> &imgPROVsls)
+{
+	int nPROImWX, nPROImWY, nPROImWZ, nPROImWT;
+	imgReadVsls.GetImageSize(nPROImWX, nPROImWY, nPROImWZ, nPROImWT);
+	const zxhImageInfo *m_pBaseImgInfo;
+	m_pBaseImgInfo=imgReadVsls.GetImageInfo();
+	short sgvsls=0;
+
+	for (int it=0;it<nPROImWT;it++)
+		for (int iz=0;iz<nPROImWZ;iz++)
+			for (int ix=0;ix<nPROImWX;ix++)
+			{
+				short sMaxInten=-1000;
+				for (int iy=0;iy<0.5*nPROImWY;iy++)
+				{
+					sgvsls=imgReadVsls.GetPixelGreyscale(ix,iy,iz,it);
+
+					if(sgvsls>=sMaxInten)
+					{
+						sMaxInten=sgvsls;
+					}
+				}
+				imgPROVsls.SetPixelByGreyscale(ix,nPROImWY*0.5,iz,it,sMaxInten);
 			}
 			
 
@@ -585,7 +808,7 @@ int main(int argc, char *argv[])//without intensity nomalization
 	//string strCMBVsls2Name ="F:/Coronary_0/Coronary_Niessen/CoronaryCMBImg/CMB_image00_v0_vesselness2.nii.gz";//high-resolution image incorporating low-resolution image v0=v0+w*vL(v0<=Threshold)
 	//read a "nifti" file (imgdata and vesselness data)
 	zxhImageDataT<short> imgReadVsls,imgPROVsls;//Change by JDQ
-
+	zxhImageDataT<short>imgPROVsls_x,imgPROVsls_y;
 	if( zxh::OpenImage( &imgReadVsls, strFileNameVsls ) == false )
 	{
 		std::cerr << "Vesselness image(nifti-file) is not found!"; 
@@ -595,6 +818,8 @@ int main(int argc, char *argv[])//without intensity nomalization
 
 	// Creat project new raw image and vesselness
 	imgPROVsls.NewImage(imgReadVsls.GetImageInfo());
+		imgPROVsls_x.NewImage(imgReadVsls.GetImageInfo());
+	imgPROVsls_y.NewImage(imgReadVsls.GetImageInfo());
 	//project the vesselness image to a new one
 	if(strLorN=="-L")
 	{
@@ -630,8 +855,51 @@ int main(int argc, char *argv[])//without intensity nomalization
 		PROVslsimg(imgReadVsls,imgPROVsls);
 		/*const zxhImageDataT<short> *img=&imgCMBRaw;
 		zxh::SaveImage(img,strCMBRawName);*/
-		const zxhImageDataT<short> *vsl=&imgPROVsls;
-		zxh::SaveImage(vsl,strPROResulVsls1Name);
+		PROVslsimg_x(imgReadVsls,imgPROVsls_x);
+		PROVslsimg_y(imgReadVsls,imgPROVsls_y);
+		const zxhImageDataT<short> *vsl_z=&imgPROVsls;
+		const zxhImageDataT<short> *vsl_x=&imgPROVsls_x;
+		const zxhImageDataT<short> *vsl_y=&imgPROVsls_y;
+		string strPROResul_z=strPROResulVsls1Name+"_z.nii.gz";
+		string strPROResul_x=strPROResulVsls1Name+"_x.nii.gz";
+		string strPROResul_y=strPROResulVsls1Name+"_y.nii.gz";
+		zxh::SaveImage(vsl_z,strPROResul_z);
+		zxh::SaveImage(vsl_x,strPROResul_x);
+		zxh::SaveImage(vsl_y,strPROResul_y);
+	}
+	if(strLorN=="-NM")
+	{
+		PROVslsimg_NM(imgReadVsls,imgPROVsls);
+		/*const zxhImageDataT<short> *img=&imgCMBRaw;
+		zxh::SaveImage(img,strCMBRawName);*/
+		PROVslsimg_x_NM(imgReadVsls,imgPROVsls_x);
+		PROVslsimg_y_NM(imgReadVsls,imgPROVsls_y);
+		const zxhImageDataT<short> *vsl_z=&imgPROVsls;
+		const zxhImageDataT<short> *vsl_x=&imgPROVsls_x;
+		const zxhImageDataT<short> *vsl_y=&imgPROVsls_y;
+		string strPROResul_z=strPROResulVsls1Name+"_NM_z.nii.gz";
+		string strPROResul_x=strPROResulVsls1Name+"_NM_x.nii.gz";
+		string strPROResul_y=strPROResulVsls1Name+"_NM_y.nii.gz";
+		zxh::SaveImage(vsl_z,strPROResul_z);
+		zxh::SaveImage(vsl_x,strPROResul_x);
+		zxh::SaveImage(vsl_y,strPROResul_y);
+	}
+	if(strLorN=="-NM2")
+	{
+		PROVslsimg_NM2(imgReadVsls,imgPROVsls);
+		/*const zxhImageDataT<short> *img=&imgCMBRaw;
+		zxh::SaveImage(img,strCMBRawName);*/
+		PROVslsimg_x_NM2(imgReadVsls,imgPROVsls_x);
+		PROVslsimg_y_NM2(imgReadVsls,imgPROVsls_y);
+		const zxhImageDataT<short> *vsl_z=&imgPROVsls;
+		const zxhImageDataT<short> *vsl_x=&imgPROVsls_x;
+		const zxhImageDataT<short> *vsl_y=&imgPROVsls_y;
+		string strPROResul_z=strPROResulVsls1Name+"_NM_z.nii.gz";
+		string strPROResul_x=strPROResulVsls1Name+"_NM_x.nii.gz";
+		string strPROResul_y=strPROResulVsls1Name+"_NM_y.nii.gz";
+		zxh::SaveImage(vsl_z,strPROResul_z);
+		zxh::SaveImage(vsl_x,strPROResul_x);
+		zxh::SaveImage(vsl_y,strPROResul_y);
 	}
 }
 

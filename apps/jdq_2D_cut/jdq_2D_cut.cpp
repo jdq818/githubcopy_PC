@@ -1779,10 +1779,10 @@ int main(int argc, char *argv[])
  //   string RorN="-R";
 //***Training Data as model****//
 	
-	string strFileNameRaw =  "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset03/image03_resave.nii.gz";
-	char *chRefCurvefilename = "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset03/vessel1/reference.vtk";
-	char *chMetCurvefilename = "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset03/vessel1/SMD_resm_SMO.txt";
-	char *chResultFilePath = "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset03/vessel1/";
+	string strFileNameRaw =  "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset07/image07_resave.nii.gz";
+	char *chRefCurvefilename = "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset07/vessel1/reference.vtk";
+	char *chMetCurvefilename = "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset07/vessel1/SMD_resm_SMO.txt";
+	char *chResultFilePath = "E:/work_jdq/rebuttal_media18/rebuttal/Exp/LowRes_0307/dataset07/vessel1/";
 	std::vector<jdq2017::point3D> ref,met;
 	char* chext=GetPathEXT(chRefCurvefilename);
 	if(strcmp(chext,".vtk")==0)// read vtk file
